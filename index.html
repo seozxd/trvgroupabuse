@@ -6,44 +6,34 @@
   <title>Loading - Please wait...</title>
   <meta name="description" content="Loading the latest spam hunter data...">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://trvgroupabuse.pages.dev/">
+  <link rel="canonical" href="/">
 
   <!-- Dynamic SEO Updater -->
 <script>
   async function applyDynamicSEO() {
-    // 1. Ziyaretçinin o anki domain'ini al
     const currentDomain = window.location.hostname;
-    // 2. 'www.' önekini temizle (KV'ye www'siz kaydettiğimiz için)
     const cleanDomain = currentDomain.replace('www.', '');
 
     try {
-      // 3. /domain-config.txt yerine YENİ API'mizi çağır
       const response = await fetch(`/config?domain=${cleanDomain}`);
 
-      // 4. API'den bir hata dönerse (örn: domain bulunamadı)
       if (!response.ok) {
         console.error("Konfigürasyon alınamadı:", response.statusText);
-        // İsteğe bağlı: Hata durumunda varsayılan başlık
         document.title = "Sayfa Bulunamadı";
         return;
       }
 
-      // 5. API'den gelen veriyi metin olarak al
-      // (örn: "Best 1 Sİte|Download links Source 1|red")
+
       const configData = await response.text();
 
-      // 6. Gelen veriyi '|' ayraçından bölerek parçala
       const parts = configData.split("|").map(part => part.trim());
       const title = parts[0];
       const description = parts[1];
       const theme = parts[2];
 
-      // 7. Veri gelmişse sayfayı güncelle
       if (title) {
-        // <title> etiketini güncelle
         document.title = title;
 
-        // <meta name="description"> etiketini güncelle (yoksa yarat)
         let metaDesc = document.querySelector('meta[name="description"]');
         if (!metaDesc) {
           metaDesc = document.createElement("meta");
@@ -52,25 +42,20 @@
         }
         metaDesc.setAttribute("content", description);
 
-        // <link rel="canonical"> etiketini güncelle (yoksa yarat)
         let canonical = document.querySelector('link[rel="canonical"]');
         if (!canonical) {
           canonical = document.createElement("link");
           canonical.setAttribute("rel", "canonical");
           document.head.appendChild(canonical);
         }
-        // Canonical link için o anki domain'i kullan
         canonical.setAttribute("href", `https://${currentDomain}/`); 
 
-        // Görünür içeriği güncelle
-        // (Bu ID'lerin HTML'de olduğundan emin olun)
         const mainTitleEl = document.getElementById("mainTitle");
         const mainDescEl = document.getElementById("mainDescription");
         
         if(mainTitleEl) mainTitleEl.textContent = title;
         if(mainDescEl) mainDescEl.textContent = description;
 
-        // <body> etiketine tema (renk) sınıfını uygula
         if (theme) {
           document.body.classList.add(`theme-${theme}`);
         }
@@ -81,11 +66,9 @@
     }
   }
 
-  // Sayfa yüklendiğinde fonksiyonu çalıştır
   document.addEventListener("DOMContentLoaded", applyDynamicSEO);
 </script>
 
-  <!-- CSS + Inline Loading Spinner -->
   <style>
     :root {
       --primary-color: #e74c3c;
@@ -228,7 +211,6 @@
     }
   </style>
 
-  <!-- External Spinner Activation -->
   <script>
     !function(){
       const e = document.createElement("div");
@@ -257,7 +239,6 @@
 
     <div class="spam-list">
       <div id="spamContainer">
-        <!-- Domains will be loaded here dynamically -->
       </div>
     </div>
 
@@ -266,7 +247,6 @@
     </div>
   </div>
 
-  <!-- Load Spam Domains -->
   <script>
     async function loadSpamDomains() {
       try {
