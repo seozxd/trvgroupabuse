@@ -131,184 +131,171 @@
             margin-top: 30px;
             opacity: 0.8;
         }
+        /* LOADING SCREEN STYLES */
+    .loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        color: white;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-top: 4px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-bottom: 20px;
+    }
+
+    .loading-text {
+        font-size: 1.2em;
+        text-align: center;
+    }
+
+    .loading-details {
+        margin-top: 10px;
+        font-size: 0.9em;
+        opacity: 0.8;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* MAIN CONTENT - INITIALLY HIDDEN */
+    .main-content {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.5s ease;
+    }
+
+    .content-loaded .loading-screen {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .content-loaded .main-content {
+        opacity: 1;
+        transform: translateY(0);
+    }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1 id="mainTitle">🚨 SPAM HUNTERS</h1>
-            <p id="mainDescription">Exposing fake websites and spam domains</p>
+    <!-- LOADING SCREEN -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">
+            <h3>🚀 Spam Hunters</h3>
+            <p>Loading security systems...</p>
         </div>
-
-        <div class="stats">
-            <div class="stat-card">
-                <h3>📊 Total Domains</h3>
-                <p id="totalDomains">0</p>
-            </div>
-            <div class="stat-card">
-                <h3>🕒 Last Update</h3>
-                <p id="lastUpdate">-</p>
-            </div>
-            <div class="stat-card">
-                <h3>🔍 Active Scanning</h3>
-                <p>✅ Active</p>
-            </div>
+        <div class="loading-details" id="loadingDetails">
+            Initializing domain protection
         </div>
+    </div>
 
-        <div class="spam-list">
-            <div id="spamContainer">
-                <!-- Domains will be loaded here dynamically -->
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <div class="container">
+            <div class="header">
+                <h1 id="mainTitle">🚨 SPAM HUNTERS</h1>
+                <p id="mainDescription">Exposing fake websites and spam domains</p>
             </div>
-        </div>
 
-        <div class="last-update">
-            <p>Last update: <span id="updateTime"></span></p>
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>📊 Total Domains</h3>
+                    <p id="totalDomains">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>🕒 Last Update</h3>
+                    <p id="lastUpdate">-</p>
+                </div>
+                <div class="stat-card">
+                    <h3>🔍 Active Scanning</h3>
+                    <p>✅ Active</p>
+                </div>
+            </div>
+
+            <div class="spam-list">
+                <div id="spamContainer">
+                    <!-- Domains will be loaded here dynamically -->
+                </div>
+            </div>
+
+            <div class="last-update">
+                <p>Last update: <span id="updateTime"></span></p>
+            </div>
         </div>
     </div>
 
     <script>
-        // CONTENT SPINNING ENGINE
-        function getRandomItem(array) {
-            return array[Math.floor(Math.random() * array.length)];
+        // LOADING MESSAGES
+        const loadingMessages = [
+            "Initializing security protocols...",
+            "Scanning spam databases...",
+            "Loading domain configurations...",
+            "Preparing protection systems...",
+            "Almost ready..."
+        ];
+
+        let currentMessageIndex = 0;
+
+        function updateLoadingMessage() {
+            const details = document.getElementById('loadingDetails');
+            if (details) {
+                details.textContent = loadingMessages[currentMessageIndex];
+                currentMessageIndex = (currentMessageIndex + 1) % loadingMessages.length;
+            }
         }
 
-     function spinContent(templates) {
-    const city = getRandomItem(templates.cities);
-    const category = getRandomItem(templates.categories);
-    
-    const title = getRandomItem(templates.titles)
-        .replace(/{city}/g, city)
-        .replace(/{category}/g, category);
-        
-    const description = getRandomItem(templates.descriptions)
-        .replace(/{city}/g, city)
-        .replace(/{category}/g, category);
-        
-    return {
-        title: title,
-        description: description
-    };
-}
+        // UPDATE LOADING MESSAGE EVERY 1.5 SECONDS
+        const messageInterval = setInterval(updateLoadingMessage, 1500);
 
-        // DOMAIN CONFIG LOADER
-        async function loadDomainConfig() {
+        async function initializePage() {
             try {
-                const response = await fetch('/domain-config.txt');
-                const text = await response.text();
-                const domains = text.split('\n')
-                    .map(line => line.trim())
-                    .filter(line => line.length > 0)
-                    .map(line => {
-                        const [domain, title, description, theme] = line.split('|');
-                        return { domain, title, description, theme };
-                    });
-                return domains;
+                // UPDATE LOADING MESSAGE
+                document.getElementById('loadingDetails').textContent = "Finalizing setup...";
+                
+                // LOAD CONFIG AND DOMAINS
+                await applyDomainConfig();
+                await loadSpamDomains();
+                
+                // UPDATE TITLE AND DESCRIPTION
+                document.title = document.getElementById('dynamicTitle').textContent;
+                
+                // HIDE LOADING SCREEN AFTER A BRIEF DELAY
+                setTimeout(() => {
+                    document.body.classList.add('content-loaded');
+                    clearInterval(messageInterval);
+                }, 500);
+                
             } catch (error) {
-                console.error('Domain config loading error:', error);
-                return [];
+                console.error('Initialization error:', error);
+                document.getElementById('loadingDetails').textContent = "Error loading content";
+                
+                // STILL SHOW CONTENT EVEN IF ERROR
+                setTimeout(() => {
+                    document.body.classList.add('content-loaded');
+                    clearInterval(messageInterval);
+                }, 1000);
             }
         }
 
-        // LOAD SPINNING TEMPLATES
-        async function loadSpinningTemplates() {
-            try {
-                const response = await fetch('/spinning-templates.json');
-                return await response.json();
-            } catch (error) {
-                console.error('Spinning templates loading error:', error);
-                return null;
-            }
-        }
-
-        // APPLY DOMAIN CONFIG
-        async function applyDomainConfig() {
-            const currentDomain = window.location.hostname;
-            const domainConfigs = await loadDomainConfig();
-            const templates = await loadSpinningTemplates();
-            
-            const config = domainConfigs.find(d => d.domain === currentDomain);
-            const spunContent = templates ? spinContent(templates) : null;
-            
-            // APPLY CONFIG OR RANDOM CONTENT
-            if (config) {
-                document.getElementById('dynamicTitle').textContent = config.title;
-                document.getElementById('dynamicDesc').setAttribute('content', config.description);
-                document.getElementById('canonicalUrl').setAttribute('href', `https://${config.domain}/`);
-                document.getElementById('mainTitle').textContent = config.title;
-                document.getElementById('mainDescription').textContent = config.description;
-                
-                // APPLY THEME
-                if (config.theme) {
-                    document.body.classList.add(`theme-${config.theme}`);
-                }
-            } else if (spunContent) {
-                document.getElementById('dynamicTitle').textContent = spunContent.title;
-                document.getElementById('dynamicDesc').setAttribute('content', spunContent.description);
-                document.getElementById('mainTitle').textContent = spunContent.title;
-                document.getElementById('mainDescription').textContent = spunContent.description;
-                
-                // RANDOM THEME
-                const randomTheme = getRandomItem(templates.themes);
-                document.body.classList.add(`theme-${randomTheme}`);
-            }
-        }
-
-        // LOAD SPAM DOMAINS
-        async function loadSpamDomains() {
-            try {
-                const response = await fetch('/domains.txt');
-                const text = await response.text();
-                const domains = text.split('\n')
-                    .map(domain => domain.trim())
-                    .filter(domain => domain.length > 0);
-                
-                displayDomains(domains);
-                updateStats(domains);
-            } catch (error) {
-                console.error('Domains loading error:', error);
-            }
-        }
-
-        // DISPLAY DOMAINS
-        function displayDomains(domains) {
-            const container = document.getElementById('spamContainer');
-            container.innerHTML = '';
-
-            domains.forEach(domain => {
-                if (!domain) return;
-                
-                const spamItem = document.createElement('div');
-                spamItem.className = 'downloadlink-item';
-                
-                spamItem.innerHTML = `
-                    <div style="flex: 1;">
-                        <span class="new-domains">${domain}</span>
-                    </div>
-                    <div>
-                        <a href="https://${domain}" 
-                           class="download-link" 
-                           target="_blank">
-                            🔗 Download Porn Videos or Files
-                        </a>
-                    </div>
-                `;
-                
-                container.appendChild(spamItem);
-            });
-        }
-
-        // UPDATE STATS
-        function updateStats(domains) {
-            document.getElementById('totalDomains').textContent = domains.length;
-            document.getElementById('lastUpdate').textContent = new Date().toLocaleDateString('en-US');
-            document.getElementById('updateTime').textContent = new Date().toLocaleString('en-US');
-        }
-
-        // INITIALIZE
-        document.addEventListener('DOMContentLoaded', async function() {
-            await applyDomainConfig();
-            await loadSpamDomains();
-        });
+        // START INITIALIZATION
+        document.addEventListener('DOMContentLoaded', initializePage);
     </script>
 </body>
 </html>
