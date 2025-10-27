@@ -172,13 +172,23 @@
             return array[Math.floor(Math.random() * array.length)];
         }
 
-        function spinContent(templates) {
-            const city = getRandomItem(templates.cities);
-            return {
-                title: getRandomItem(templates.titles).replace(/{city}/g, city),
-                description: getRandomItem(templates.descriptions).replace(/{city}/g, city)
-            };
-        }
+     function spinContent(templates) {
+    const city = getRandomItem(templates.cities);
+    const category = getRandomItem(templates.categories);
+    
+    const title = getRandomItem(templates.titles)
+        .replace(/{city}/g, city)
+        .replace(/{category}/g, category);
+        
+    const description = getRandomItem(templates.descriptions)
+        .replace(/{city}/g, city)
+        .replace(/{category}/g, category);
+        
+    return {
+        title: title,
+        description: description
+    };
+}
 
         // DOMAIN CONFIG LOADER
         async function loadDomainConfig() {

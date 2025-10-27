@@ -1,15 +1,21 @@
 {
   "titles": [
+    "Spam Hunters - {city} Zone",
+    "{city} Spam Exposure Center", 
+    "Spam Reports - {city} Special",
     "Adult Content - Hot {category} Videos {city}",
-    "{city} {category} - Premium Adult Entertainment", 
-    "Hot {category} {city} - Exclusive Adult Content"
+    "{category} Entertainment - {city} Premium",
+    "Exclusive {category} Content {city}"
   ],
   "descriptions": [
-    "Best {category} adult videos in {city}. Hot content updated daily!",
+    "Exposing spam sites in {city} region",
+    "{city} spam hunters are active",
+    "Special spam list for {city}",
     "Premium {category} entertainment in {city}. Exclusive adult videos!",
-    "{city} top {category} adult site. Daily new hot videos!"
+    "Best {category} content available in {city}. Hot videos!",
+    "{city} area {category} specialists. Premium adult entertainment!"
   ],
-  "categories": ["porno", "sex", "xxx", "adult", "nsfw", "erotic"],
-  "cities": ["Istanbul", "Ankara", "Izmir", "Bursa", "Antalya", "London", "Berlin", "Paris"],
+  "cities": ["Istanbul", "Ankara", "Izmir", "Bursa", "Antalya", "London", "New York"],
+  "categories": ["porno", "adult", "xxx", "sexy", "hot", "premium", "vip", "exclusive"],
   "themes": ["red", "blue", "green", "purple", "orange", "dark"]
 }
