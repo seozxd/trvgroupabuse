@@ -1,62 +1,216 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spam Avcıları - TRV Group Abuse</title>
+    <title>Spam Avcıları - TRV Group Taklitçi Siteler İfşası</title>
+    <meta name="description" content="TRV Group'u taklit eden spam sitelerin ifşası. Sahte domainler, taklitçi web siteleri ve spam linklerin listesi.">
+    <meta name="keywords" content="trv group, spam, taklit site, sahte domain, ifşa, spam avcıları">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://trvgroupabuse.pages.dev/">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Spam Avcıları - TRV Group Taklitçi Siteler İfşası">
+    <meta property="og:description" content="TRV Group'u taklit eden spam sitelerin ifşası">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://trvgroupabuse.pages.dev/">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Spam Avcıları - TRV Group Taklitçi Siteler İfşası",
+        "description": "TRV Group'u taklit eden spam sitelerin ifşası",
+        "url": "https://trvgroupabuse.pages.dev/",
+        "mainEntity": {
+            "@type": "ItemList",
+            "numberOfItems": 50,
+            "itemListElement": []
+        }
+    }
+    </script>
+    
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #f5f5f5;
         }
         .header {
             text-align: center;
-            background: #ff4444;
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+        .header h1 {
+            color: #e74c3c;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .header p {
+            color: #666;
+            font-size: 1.2em;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
             margin-bottom: 30px;
         }
-        .spam-list {
-            background: white;
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .spam-list {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
         .spam-item {
-            padding: 15px;
+            padding: 20px;
             border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: between;
+            align-items: center;
         }
         .spam-item:last-child {
             border-bottom: none;
         }
+        .spam-domain {
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 1.1em;
+        }
+        .spam-link {
+            background: #3498db;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .spam-link:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        .last-update {
+            text-align: center;
+            color: white;
+            margin-top: 30px;
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>🚨 SPAM AVCILARI</h1>
-        <p>TRV Group'u taklit eden şerefsizlerin ifşası</p>
-    </div>
-
-    <div class="spam-list">
-        <div class="spam-item">
-            <h3>❌ Örnek Spam Site 1</h3>
-            <p><strong>Domain:</strong> ornekspam1.com</p>
-            <p><strong>Tespit Tarihi:</strong> 2024-01-15</p>
+    <div class="container">
+        <div class="header">
+            <h1>🚨 SPAM AVCILARI</h1>
+            <p>TRV Group'u taklit eden şerefsizlerin ifşası</p>
         </div>
-        <div class="spam-item">
-            <h3>❌ Örnek Spam Site 2</h3>
-            <p><strong>Domain:</strong> ornekspam2.com</p>
-            <p><strong>Tespit Tarihi:</strong> 2024-01-15</p>
+
+        <div class="stats">
+            <div class="stat-card">
+                <h3>📊 Toplam Domain</h3>
+                <p id="totalDomains">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>🕒 Son Güncelleme</h3>
+                <p id="lastUpdate">-</p>
+            </div>
+            <div class="stat-card">
+                <h3>🔍 Aktif Tarama</h3>
+                <p>✅ Aktif</p>
+            </div>
+        </div>
+
+        <div class="spam-list">
+            <div id="spamContainer">
+                <!-- Domainler buraya dinamik olarak eklenecek -->
+            </div>
+        </div>
+
+        <div class="last-update">
+            <p>Son güncelleme: <span id="updateTime"></span></p>
         </div>
     </div>
 
     <script>
-        // Buraya dinamik veriler gelecek
-        console.log("Spam avcıları aktif! 🚀");
+        // Domainleri domains.txt'den yükle
+        async function loadDomains() {
+            try {
+                const response = await fetch('/domains.txt');
+                const text = await response.text();
+                const domains = text.split('\n')
+                    .map(domain => domain.trim())
+                    .filter(domain => domain.length > 0);
+                
+                displayDomains(domains);
+                updateStats(domains);
+            } catch (error) {
+                console.error('Domainler yüklenirken hata:', error);
+            }
+        }
+
+        // Domainleri sayfada göster
+        function displayDomains(domains) {
+            const container = document.getElementById('spamContainer');
+            container.innerHTML = '';
+
+            domains.forEach(domain => {
+                if (!domain) return;
+                
+                const spamItem = document.createElement('div');
+                spamItem.className = 'spam-item';
+                
+                // DOFOLLOW + NEW TAB linkleri
+                spamItem.innerHTML = `
+                    <div style="flex: 1;">
+                        <span class="spam-domain">${domain}</span>
+                    </div>
+                    <div>
+                        <a href="https://${domain}" 
+                           class="spam-link" 
+                           target="_blank" 
+                           rel="dofollow noopener noreferrer">
+                            🔗 Siteyi Ziyaret Et
+                        </a>
+                    </div>
+                `;
+                
+                container.appendChild(spamItem);
+            });
+        }
+
+        // İstatistikleri güncelle
+        function updateStats(domains) {
+            document.getElementById('totalDomains').textContent = domains.length;
+            document.getElementById('lastUpdate').textContent = new Date().toLocaleDateString('tr-TR');
+            document.getElementById('updateTime').textContent = new Date().toLocaleString('tr-TR');
+        }
+
+        // Sayfa yüklendiğinde domainleri yükle
+        document.addEventListener('DOMContentLoaded', loadDomains);
     </script>
 </body>
 </html>
