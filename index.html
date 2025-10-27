@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preload" href="loading-manager.js" as="script">
+    <script>
+        // INLINE FALLBACK - EXTREMELY FAST
+        !function(){var e=document.createElement("div");e.innerHTML='<div id="externalLoadingScreen" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:99999;color:white;font-family:Arial"><div style="width:40px;height:40px;border:3px solid rgba(255,255,255,0.3);border-top:3px solid white;border-radius:50%;animation:spin 1s linear infinite;margin-bottom:15px"></div><div>Loading...</div></div><style>@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}body.loaded #externalLoadingScreen{opacity:0;visibility:hidden;transition:all .5s}</style>',document.body.prepend(e.children[0]),document.body.style.visibility="hidden",window.addEventListener("load",function(){document.body.style.visibility="visible",setTimeout(function(){document.body.classList.add("loaded")},100)})}();
+    </script>
     <title id="dynamicTitle">Spam Hunters - Exposure Center</title>
     <meta name="description" id="dynamicDesc" content="Exposing fake and spam sites">
     <meta name="robots" content="index, follow">
