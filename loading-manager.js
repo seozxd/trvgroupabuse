@@ -30,7 +30,7 @@
                 animation: externalSpin 1s linear infinite;
                 margin-bottom: 15px;
             "></div>
-            <div>Loading Spam Hunters...</div>
+            <div>Loading Link Database, Please Wait...</div>
         </div>
         
         <style>
