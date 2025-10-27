@@ -1,0 +1,2 @@
+test1.trvgroupabuse.pages.dev|Test Site 1|First test site for spam hunting|red
+test2.trvgroupabuse.pages.dev|Test Site 2|Second test spam exposure|blue

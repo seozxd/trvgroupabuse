@@ -1,0 +1,15 @@
+{
+  "titles": [
+    "Adult Content - Hot {category} Videos {city}",
+    "{city} {category} - Premium Adult Entertainment", 
+    "Hot {category} {city} - Exclusive Adult Content"
+  ],
+  "descriptions": [
+    "Best {category} adult videos in {city}. Hot content updated daily!",
+    "Premium {category} entertainment in {city}. Exclusive adult videos!",
+    "{city} top {category} adult site. Daily new hot videos!"
+  ],
+  "categories": ["porno", "sex", "xxx", "adult", "nsfw", "erotic"],
+  "cities": ["Istanbul", "Ankara", "Izmir", "Bursa", "Antalya", "London", "Berlin", "Paris"],
+  "themes": ["red", "blue", "green", "purple", "orange", "dark"]
+}

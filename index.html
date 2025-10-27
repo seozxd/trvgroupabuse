@@ -1,54 +1,59 @@
 <!DOCTYPE html>
-<html lang="tr" dir="ltr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spam Avcıları - TRV Group Taklitçi Siteler İfşası</title>
-    <meta name="description" content="TRV Group'u taklit eden spam sitelerin ifşası. Sahte domainler, taklitçi web siteleri ve spam linklerin listesi.">
-    <meta name="keywords" content="trv group, spam, taklit site, sahte domain, ifşa, spam avcıları">
-    <meta name="robots" content="index, follow, max-image-preview:large">
-    <link rel="canonical" href="https://trvgroupabuse.pages.dev/">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="Spam Avcıları - TRV Group Taklitçi Siteler İfşası">
-    <meta property="og:description" content="TRV Group'u taklit eden spam sitelerin ifşası">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://trvgroupabuse.pages.dev/">
+    <title id="dynamicTitle">Spam Hunters - Exposure Center</title>
+    <meta name="description" id="dynamicDesc" content="Exposing fake and spam sites">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" id="canonicalUrl" href="https://trvgroupabuse.pages.dev/">
     
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebPage",
-        "name": "Spam Avcıları - TRV Group Taklitçi Siteler İfşası",
-        "description": "TRV Group'u taklit eden spam sitelerin ifşası",
-        "url": "https://trvgroupabuse.pages.dev/",
-        "mainEntity": {
-            "@type": "ItemList",
-            "numberOfItems": 50,
-            "itemListElement": []
-        }
+        "name": "Spam Hunters - Exposure Center",
+        "description": "Exposing fake and spam sites",
+        "url": "https://trvgroupabuse.pages.dev/"
     }
     </script>
     
     <style>
+        :root {
+            --primary-color: #e74c3c;
+            --secondary-color: #3498db;
+            --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .theme-red { --primary-color: #e74c3c; --background: linear-gradient(135deg, #ff6b6b, #ee5a24); }
+        .theme-blue { --primary-color: #3498db; --background: linear-gradient(135deg, #74b9ff, #0984e3); }
+        .theme-green { --primary-color: #27ae60; --background: linear-gradient(135deg, #00b894, #00a085); }
+        .theme-purple { --primary-color: #9b59b6; --background: linear-gradient(135deg, #a29bfe, #6c5ce7); }
+        .theme-orange { --primary-color: #e67e22; --background: linear-gradient(135deg, #fdcb6e, #e17055); }
+        .theme-dark { --primary-color: #2c3e50; --background: linear-gradient(135deg, #2c3e50, #34495e); }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--background);
             min-height: 100vh;
+            transition: all 0.3s ease;
         }
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
+        
         .header {
             text-align: center;
             background: rgba(255, 255, 255, 0.95);
@@ -58,21 +63,20 @@
             margin-bottom: 30px;
             backdrop-filter: blur(10px);
         }
+        
         .header h1 {
-            color: #e74c3c;
+            color: var(--primary-color);
             font-size: 2.5em;
             margin-bottom: 10px;
         }
-        .header p {
-            color: #666;
-            font-size: 1.2em;
-        }
+        
         .stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
             margin-bottom: 30px;
         }
+        
         .stat-card {
             background: rgba(255, 255, 255, 0.95);
             padding: 20px;
@@ -80,40 +84,47 @@
             text-align: center;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
+        
         .spam-list {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
             padding: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
+        
         .spam-item {
             padding: 20px;
             border-bottom: 1px solid #eee;
             display: flex;
-            justify-content: between;
+            justify-content: space-between;
             align-items: center;
         }
+        
         .spam-item:last-child {
             border-bottom: none;
         }
+        
         .spam-domain {
             font-weight: bold;
-            color: #e74c3c;
+            color: var(--primary-color);
             font-size: 1.1em;
         }
+        
         .spam-link {
-            background: #3498db;
+            background: var(--primary-color);
             color: white;
-            padding: 8px 15px;
+            padding: 10px 20px;
             border-radius: 5px;
             text-decoration: none;
             font-weight: bold;
             transition: all 0.3s ease;
         }
+        
         .spam-link:hover {
-            background: #2980b9;
+            background: var(--secondary-color);
             transform: translateY(-2px);
         }
+        
         .last-update {
             text-align: center;
             color: white;
@@ -125,39 +136,115 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🚨 SPAM AVCILARI</h1>
-            <p>TRV Group'u taklit eden şerefsizlerin ifşası</p>
+            <h1 id="mainTitle">🚨 SPAM HUNTERS</h1>
+            <p id="mainDescription">Exposing fake websites and spam domains</p>
         </div>
 
         <div class="stats">
             <div class="stat-card">
-                <h3>📊 Toplam Domain</h3>
+                <h3>📊 Total Domains</h3>
                 <p id="totalDomains">0</p>
             </div>
             <div class="stat-card">
-                <h3>🕒 Son Güncelleme</h3>
+                <h3>🕒 Last Update</h3>
                 <p id="lastUpdate">-</p>
             </div>
             <div class="stat-card">
-                <h3>🔍 Aktif Tarama</h3>
-                <p>✅ Aktif</p>
+                <h3>🔍 Active Scanning</h3>
+                <p>✅ Active</p>
             </div>
         </div>
 
         <div class="spam-list">
             <div id="spamContainer">
-                <!-- Domainler buraya dinamik olarak eklenecek -->
+                <!-- Domains will be loaded here dynamically -->
             </div>
         </div>
 
         <div class="last-update">
-            <p>Son güncelleme: <span id="updateTime"></span></p>
+            <p>Last update: <span id="updateTime"></span></p>
         </div>
     </div>
 
     <script>
-        // Domainleri domains.txt'den yükle
-        async function loadDomains() {
+        // CONTENT SPINNING ENGINE
+        function getRandomItem(array) {
+            return array[Math.floor(Math.random() * array.length)];
+        }
+
+        function spinContent(templates) {
+            const city = getRandomItem(templates.cities);
+            return {
+                title: getRandomItem(templates.titles).replace(/{city}/g, city),
+                description: getRandomItem(templates.descriptions).replace(/{city}/g, city)
+            };
+        }
+
+        // DOMAIN CONFIG LOADER
+        async function loadDomainConfig() {
+            try {
+                const response = await fetch('/domain-config.txt');
+                const text = await response.text();
+                const domains = text.split('\n')
+                    .map(line => line.trim())
+                    .filter(line => line.length > 0)
+                    .map(line => {
+                        const [domain, title, description, theme] = line.split('|');
+                        return { domain, title, description, theme };
+                    });
+                return domains;
+            } catch (error) {
+                console.error('Domain config loading error:', error);
+                return [];
+            }
+        }
+
+        // LOAD SPINNING TEMPLATES
+        async function loadSpinningTemplates() {
+            try {
+                const response = await fetch('/spinning-templates.json');
+                return await response.json();
+            } catch (error) {
+                console.error('Spinning templates loading error:', error);
+                return null;
+            }
+        }
+
+        // APPLY DOMAIN CONFIG
+        async function applyDomainConfig() {
+            const currentDomain = window.location.hostname;
+            const domainConfigs = await loadDomainConfig();
+            const templates = await loadSpinningTemplates();
+            
+            const config = domainConfigs.find(d => d.domain === currentDomain);
+            const spunContent = templates ? spinContent(templates) : null;
+            
+            // APPLY CONFIG OR RANDOM CONTENT
+            if (config) {
+                document.getElementById('dynamicTitle').textContent = config.title;
+                document.getElementById('dynamicDesc').setAttribute('content', config.description);
+                document.getElementById('canonicalUrl').setAttribute('href', `https://${config.domain}/`);
+                document.getElementById('mainTitle').textContent = config.title;
+                document.getElementById('mainDescription').textContent = config.description;
+                
+                // APPLY THEME
+                if (config.theme) {
+                    document.body.classList.add(`theme-${config.theme}`);
+                }
+            } else if (spunContent) {
+                document.getElementById('dynamicTitle').textContent = spunContent.title;
+                document.getElementById('dynamicDesc').setAttribute('content', spunContent.description);
+                document.getElementById('mainTitle').textContent = spunContent.title;
+                document.getElementById('mainDescription').textContent = spunContent.description;
+                
+                // RANDOM THEME
+                const randomTheme = getRandomItem(templates.themes);
+                document.body.classList.add(`theme-${randomTheme}`);
+            }
+        }
+
+        // LOAD SPAM DOMAINS
+        async function loadSpamDomains() {
             try {
                 const response = await fetch('/domains.txt');
                 const text = await response.text();
@@ -168,11 +255,11 @@
                 displayDomains(domains);
                 updateStats(domains);
             } catch (error) {
-                console.error('Domainler yüklenirken hata:', error);
+                console.error('Domains loading error:', error);
             }
         }
 
-        // Domainleri sayfada göster
+        // DISPLAY DOMAINS
         function displayDomains(domains) {
             const container = document.getElementById('spamContainer');
             container.innerHTML = '';
@@ -183,7 +270,6 @@
                 const spamItem = document.createElement('div');
                 spamItem.className = 'spam-item';
                 
-                // DOFOLLOW + NEW TAB linkleri
                 spamItem.innerHTML = `
                     <div style="flex: 1;">
                         <span class="spam-domain">${domain}</span>
@@ -193,7 +279,7 @@
                            class="spam-link" 
                            target="_blank" 
                            rel="dofollow noopener noreferrer">
-                            🔗 Siteyi Ziyaret Et
+                            🔗 Visit Site
                         </a>
                     </div>
                 `;
@@ -202,15 +288,18 @@
             });
         }
 
-        // İstatistikleri güncelle
+        // UPDATE STATS
         function updateStats(domains) {
             document.getElementById('totalDomains').textContent = domains.length;
-            document.getElementById('lastUpdate').textContent = new Date().toLocaleDateString('tr-TR');
-            document.getElementById('updateTime').textContent = new Date().toLocaleString('tr-TR');
+            document.getElementById('lastUpdate').textContent = new Date().toLocaleDateString('en-US');
+            document.getElementById('updateTime').textContent = new Date().toLocaleString('en-US');
         }
 
-        // Sayfa yüklendiğinde domainleri yükle
-        document.addEventListener('DOMContentLoaded', loadDomains);
+        // INITIALIZE
+        document.addEventListener('DOMContentLoaded', async function() {
+            await applyDomainConfig();
+            await loadSpamDomains();
+        });
     </script>
 </body>
 </html>
