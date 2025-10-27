@@ -92,7 +92,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
         
-        .spam-item {
+        .downloadlink-item {
             padding: 20px;
             border-bottom: 1px solid #eee;
             display: flex;
@@ -100,17 +100,17 @@
             align-items: center;
         }
         
-        .spam-item:last-child {
+        .downloadlink-item:last-child {
             border-bottom: none;
         }
         
-        .spam-domain {
+        .new-domains {
             font-weight: bold;
             color: var(--primary-color);
             font-size: 1.1em;
         }
         
-        .spam-link {
+        .download-link {
             background: var(--primary-color);
             color: white;
             padding: 10px 20px;
@@ -120,7 +120,7 @@
             transition: all 0.3s ease;
         }
         
-        .spam-link:hover {
+        .download-link:hover {
             background: var(--secondary-color);
             transform: translateY(-2px);
         }
@@ -278,15 +278,15 @@
                 if (!domain) return;
                 
                 const spamItem = document.createElement('div');
-                spamItem.className = 'spam-item';
+                spamItem.className = 'downloadlink-item';
                 
                 spamItem.innerHTML = `
                     <div style="flex: 1;">
-                        <span class="spam-domain">${domain}</span>
+                        <span class="new-domains">${domain}</span>
                     </div>
                     <div>
                         <a href="https://${domain}" 
-                           class="spam-link" 
+                           class="download-link" 
                            target="_blank" 
                            rel="dofollow noopener noreferrer">
                             🔗 Visit Site
