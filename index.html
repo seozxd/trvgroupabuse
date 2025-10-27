@@ -9,58 +9,81 @@
   <link rel="canonical" href="https://trvgroupabuse.pages.dev/">
 
   <!-- Dynamic SEO Updater -->
-  <script>
-    async function applyDynamicSEO() {
-      const currentDomain = window.location.hostname;
-      try {
-        const response = await fetch("/domain-config.txt");
-        const text = await response.text();
-        const lines = text.split("\n").map(line => line.trim()).filter(Boolean);
+<script>
+  async function applyDynamicSEO() {
+    // 1. Ziyaretçinin o anki domain'ini al
+    const currentDomain = window.location.hostname;
+    // 2. 'www.' önekini temizle (KV'ye www'siz kaydettiğimiz için)
+    const cleanDomain = currentDomain.replace('www.', '');
 
-        const configs = lines.map(line => {
-          const [domain, title, description, theme] = line.split("|");
-          return { domain, title, description, theme };
-        });
+    try {
+      // 3. /domain-config.txt yerine YENİ API'mizi çağır
+      const response = await fetch(`/config?domain=${cleanDomain}`);
 
-        const config = configs.find(cfg => cfg.domain === currentDomain);
-        if (!config) return;
+      // 4. API'den bir hata dönerse (örn: domain bulunamadı)
+      if (!response.ok) {
+        console.error("Konfigürasyon alınamadı:", response.statusText);
+        // İsteğe bağlı: Hata durumunda varsayılan başlık
+        document.title = "Sayfa Bulunamadı";
+        return;
+      }
 
-        // Update <title>
-        document.title = config.title;
+      // 5. API'den gelen veriyi metin olarak al
+      // (örn: "Best 1 Sİte|Download links Source 1|red")
+      const configData = await response.text();
 
-        // Update <meta name="description">
+      // 6. Gelen veriyi '|' ayraçından bölerek parçala
+      const parts = configData.split("|").map(part => part.trim());
+      const title = parts[0];
+      const description = parts[1];
+      const theme = parts[2];
+
+      // 7. Veri gelmişse sayfayı güncelle
+      if (title) {
+        // <title> etiketini güncelle
+        document.title = title;
+
+        // <meta name="description"> etiketini güncelle (yoksa yarat)
         let metaDesc = document.querySelector('meta[name="description"]');
         if (!metaDesc) {
           metaDesc = document.createElement("meta");
           metaDesc.setAttribute("name", "description");
           document.head.appendChild(metaDesc);
         }
-        metaDesc.setAttribute("content", config.description);
+        metaDesc.setAttribute("content", description);
 
-        // Update <link rel="canonical">
+        // <link rel="canonical"> etiketini güncelle (yoksa yarat)
         let canonical = document.querySelector('link[rel="canonical"]');
         if (!canonical) {
           canonical = document.createElement("link");
           canonical.setAttribute("rel", "canonical");
           document.head.appendChild(canonical);
         }
-        canonical.setAttribute("href", `https://${config.domain}/`);
+        // Canonical link için o anki domain'i kullan
+        canonical.setAttribute("href", `https://${currentDomain}/`); 
 
-        // Update visible content
-        document.getElementById("mainTitle").textContent = config.title;
-        document.getElementById("mainDescription").textContent = config.description;
+        // Görünür içeriği güncelle
+        // (Bu ID'lerin HTML'de olduğundan emin olun)
+        const mainTitleEl = document.getElementById("mainTitle");
+        const mainDescEl = document.getElementById("mainDescription");
+        
+        if(mainTitleEl) mainTitleEl.textContent = title;
+        if(mainDescEl) mainDescEl.textContent = description;
 
-        // Apply theme class to <body>
-        if (config.theme) {
-          document.body.classList.add(`theme-${config.theme}`);
+        // <body> etiketine tema (renk) sınıfını uygula
+        if (theme) {
+          document.body.classList.add(`theme-${theme}`);
         }
-      } catch (e) {
-        console.error("SEO dynamic load failed:", e);
       }
-    }
 
-    document.addEventListener("DOMContentLoaded", applyDynamicSEO);
-  </script>
+    } catch (e) {
+      console.error("SEO dinamik yüklenirken hata oluştu:", e);
+    }
+  }
+
+  // Sayfa yüklendiğinde fonksiyonu çalıştır
+  document.addEventListener("DOMContentLoaded", applyDynamicSEO);
+</script>
 
   <!-- CSS + Inline Loading Spinner -->
   <style>
